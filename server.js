@@ -1,5 +1,5 @@
 const express = require('express');
-
+const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
@@ -17,6 +17,9 @@ const cartRoute = require('./Routes/cart');
 
 // import the order route
 const orderRoute = require('./Routes/order');
+
+// import the stripe route
+const stripeRoute = require('./Routes/stripe');
 
 
 // configure the dotenv file
@@ -47,6 +50,9 @@ app.get('/api/test', (req, res) => {
 // use express json
 app.use(express.json());
 
+// use cors
+app.use(cors());
+
 // use the userRoute
 app.use('/api/user', userRoute);
 
@@ -63,6 +69,9 @@ app.use('/api/cart', cartRoute);
 
 // use the orderRoute
 app.use('/api/order', orderRoute);
+
+// use the stripeRoute
+app.use('/api/pay', stripeRoute);
 
 
 // APP listening on PORT
